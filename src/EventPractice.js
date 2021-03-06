@@ -1,40 +1,44 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class EventPractice extends Component {
-  state = {
-    message: ""
+const EventPractice = () => {
+  const [username, setUsername] = useState("");
+  const [message, setMessage] = useState("");
+  const onChangeUsername = e => setUsername(e.taget.value);
+  const onChangeMessage = e => setMessage(e.target.value);
+  const onClick = () => {
+    alert(username + ":" + message);
+    setUsername("");
+    setMessage("");
   };
 
-  render() {
-    return (
-      <div>
-        <h1>이벤트 연습</h1>
+  const onKeyPress = e => {
+    if (e.key === "Enter") {
+      onClick();
+    }
+  };
 
-        <input
-          type="text"
-          name="message"
-          placeholder="아무거나 입력하세요"
-          value={this.state.message}
-          onChange={e => {
-            this.setState({
-              message: e.target.value
-            });
-          }}
-        />
+  return (
+    <div>
+      <h1>이벤트 연습</h1>
+      <input
+        type="text"
+        name="username"
+        placeholder="사용자명"
+        value={username}
+        onChange={onChangeUsername}
+      />
 
-        <button
-          onClick={() => {
-            alert(this.state.message);
-            this.setState({
-              message: ""
-            });
-          }}
-        >
-          확인
-        </button>
-      </div>
-    );
-  }
-}
+      <input
+        type="text"
+        nane="message"
+        placeholder="아무거나 입력하세요"
+        value={message}
+        onChange={onChangeMessage}
+        onKeyPress={onkeypress}
+      />
+      <button onClick={onClick}>확인</button>
+    </div>
+  );
+};
 
 export default EventPractice;
